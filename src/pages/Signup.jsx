@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api"; // use the same api helper
+import api from "../api/api";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -16,12 +16,10 @@ function Signup() {
     try {
       const res = await api.post("/auth/register", { name, email, password });
 
-      // ✅ Option 1: redirect to login after signup
+    
       navigate("/");
 
-      // ✅ Option 2 (optional): auto login user
-      // localStorage.setItem("token", res.data.token);
-      // navigate("/dashboard");
+     
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Signup failed. Try again.");
