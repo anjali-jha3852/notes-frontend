@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api"; // use your api helper
+import api from "../api/api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,10 +15,10 @@ function Login() {
     try {
       const res = await api.post("/auth/login", { email, password });
 
-      // ✅ Save token
+    
       localStorage.setItem("token", res.data.token);
 
-      // ✅ Redirect to dashboard
+     
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
