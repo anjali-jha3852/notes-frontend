@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import api from "../api/api"; // make sure file is exactly api.jsx
+import api from "../api/api"; 
 
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
-  const [title, setTitle] = useState("");         // initialize as string
+  const [title, setTitle] = useState("");         
   const [description, setDescription] = useState("");
   const [showCompleted, setShowCompleted] = useState(true);
   const [showNotCompleted, setShowNotCompleted] = useState(true);
@@ -13,16 +13,16 @@ function Dashboard() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  // Redirect if not logged in
+
   useEffect(() => {
     if (!token) navigate("/");
   }, [token, navigate]);
 
-  // Fetch tasks from backend
+
   const fetchTasks = async () => {
     try {
       const res = await api.get("/tasks");
-      // Ensure title/description are strings to prevent controlled input warnings
+   
       const fixedTasks = res.data.map((t) => ({
         ...t,
         title: t.title || "",
@@ -41,7 +41,7 @@ function Dashboard() {
   // Add new task
   const handleAdd = async (e) => {
     e.preventDefault();
-    if (!title.trim()) return; // prevent empty title
+    if (!title.trim()) return; 
     try {
       await api.post("/tasks", { title, description, completed: false });
       setTitle("");
@@ -52,7 +52,7 @@ function Dashboard() {
     }
   };
 
-  // Delete task
+ 
   const handleDelete = async (id) => {
     try {
       await api.delete(`/tasks/${id}`);
@@ -62,7 +62,7 @@ function Dashboard() {
     }
   };
 
-  // Toggle completion
+ 
   const handleToggleComplete = async (task) => {
     try {
       const updatedTask = { ...task, completed: !task.completed };
@@ -75,7 +75,7 @@ function Dashboard() {
     }
   };
 
-  // Logout
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -88,7 +88,7 @@ function Dashboard() {
     return true;
   });
 
-  // Sort uncompleted first
+ 
   const sortedTasks = [...filteredTasks].sort((a, b) =>
     a.completed === b.completed ? 0 : a.completed ? 1 : -1
   );
@@ -126,7 +126,7 @@ function Dashboard() {
           </label>
         </div>
 
-        {/* Add Task */}
+        
         <form
           onSubmit={handleAdd}
           className="flex flex-col sm:flex-col flex-nowrap gap-3 mb-6"
@@ -154,7 +154,7 @@ function Dashboard() {
           </button>
         </form>
 
-        {/* Task List */}
+       
         <ul className="space-y-4">
           <AnimatePresence>
             {sortedTasks.map((task) => (
