@@ -1,16 +1,25 @@
-# React + Vite
+##  Frontend–Backend Integration & Scaling for Production
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The React + Tailwind frontend communicates with the Node.js + Express backend using REST APIs via Axios.
 
-Currently, two official plugins are available:
+All API requests (register, login, CRUD) are sent to the backend URL stored in `.env`:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The JWT token (from login) is stored in `localStorage` and added in headers for protected routes:
 
-## React Compiler
+### 🔒 Protected Routes
+- Dashboard is accessible only with a valid token.
+- Token validation is handled both client-side and server-side.
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🌍 Deployment
+- **Frontend:** Vercel → [https://notes-frontend-pi-ten.vercel.app](https://notes-frontend-pi-ten.vercel.app)
+- **Backend:** Render 
+- **Database:** MongoDB Atlas
 
-## Expanding the ESLint configuration
+### 📈 Scaling for Production
+- Use **environment variables** for API base URLs.
+- Enable **HTTPS** and **CORS** for secure communication.
+- Optimize frontend with **code splitting** and **lazy loading**.
+- Use **cloud database** and **process managers (PM2/Docker)** for backend scaling.
+- Add **rate limiting**, **error handling**, and **logging** for stability.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The app is modular and ready for production deployment.
